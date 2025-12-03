@@ -1,0 +1,216 @@
+﻿@model MVC_App.Models.CardModels.CardModel
+@{
+    ViewData["title"] = "Détail de : " + Model.name;
+}
+<div class="card-area" style="min-height: 410px;">
+    <div class="column1">
+        <div class="card-image">
+            <figure>
+                <img id="card-artwork" class="zoom" src="@Model.card_images.First().image_url" title="@Model.name"
+                     loading="lazy" alt="@Model.name"/>
+                <figcaption>
+                    @if (Model.misc_info != null && Model.misc_info.Any())
+                    {
+                        <div class="format-row-grid">
+                            @foreach (var format in Model.misc_info.First().formats ?? [])
+                            {
+                                <span class="format-row" title="LEGAL in @format">@format</span>
+                            }
+                        </div>
+                    }
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <div class="column2">
+        <div class="card-name">
+            <h1>@Model.name</h1>
+        </div>
+        @if (Model.misc_info != null && Model.misc_info.Any())
+        {
+            <div class="resources-bar">
+                @foreach (var views in Model.misc_info ?? [])
+                {
+                    <span>
+                                    <i class="fa-solid fa-magnifying-glass"></i> Views: @views.views
+                                </span>
+                    <span>
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                        Views this Week: @views.viewsweek
+                                </span>
+                }
+            </div>
+        }
+
+        <ul class="card-data-info">
+            @if (Model.type is "Spell Card" or "Trap Card")
+            {
+                <li>
+                    <span class="card-data-header">Type</span>
+                    <span class="card-data-cost card-data-subheader">
+                        <i class="fa-solid fa-book"></i>
+                        <a href="#">@(Model.race + " " + Model.type)</a>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <span class="card-data-header">Type</span>
+                    <span class="card-data-cost card-data-subheader">
+                        <i class="fa-solid fa-book"></i>
+                        <a href="#">@Model.type</a>
+                    </span>
+                </li>
+                <li>
+                    <span class="card-data-header">Typing</span>
+                    <span class="card-data-cost card-data-subheader">
+                        <img class="card-typing-icon"
+                             src="https://images.ygoprodeck.com/images/cards/icons/race/@(Model.race).png"
+                             alt="Fairy" title="Fairy" loading="lazy">
+                        <a href="#">@Model.race</a>
+                    </span>
+                </li>
+            }
+            @if (Model.attribute != null && Model.attribute.Any())
+            {
+                <li>
+                    <span class="card-data-header">Attribute</span>
+                    <span class="card-data-cost card-data-subheader">
+                        <img class="card-typing-icon"
+                             src="https://images.ygoprodeck.com/images/cards/@(Model.attribute).jpg"
+                             alt="@Model.attribute"
+                             title="@Model.attribute" loading="lazy">
+                        <a href="#">@Model.attribute</a>
+                    </span>
+                </li>
+            }
+            @if (Model.level is > 0)
+            {
+                <li>
+                    <span class="card-data-header">Level/Rank</span>
+                    <span class="card-data-cost card-data-subheader">
+                        <img class="card-typing-icon"
+                             src="https://ygoprodeck.com/wp-content/uploads/2017/01/level.png" alt="@Model.level"
+                             title="@Model.level"
+                             loading="lazy">
+                        <a href="#">@Model.level</a>
+                    </span>
+                </li>
+            }
+            @if (Model.scale != null)
+            {
+                <li>
+                    <span class="card-data-header">Scale</span>
+                    <span class="card-data-cost card-data-subheader">
+                        <img class="card-typing-icon"
+                             src="https://ygoprodeck.com/wp-content/uploads/2017/01/level.png" alt="@Model.scale"
+                             title="@Model.scale"
+                             loading="lazy">
+                        <a href="#">@Model.scale</a>
+                    </span>
+                </li>
+            }
+            @if (Model.linkval != null)
+            {
+                <li>
+                    <span class="card-data-header">Link</span>
+                    <span class="card-data-cost card-data-subheader">
+                        <img class="card-typing-icon"
+                             src="https://ygoprodeck.com/wp-content/uploads/2017/01/level.png" alt="@Model.linkval"
+                             title="@Model.linkval"
+                             loading="lazy">
+                        <a href="#">@Model.linkval</a>
+                    </span>
+                </li>
+            }
+            @if (Model.type.Contains("Link"))
+            {
+                <li>
+                    <span class="card-data-header">ATK</span>
+                    <span class="card-data-cost card-data-subheader">
+                        <img src="~/img/sword.png" alt="@Model.DisplayAtk" width="25" class="img-thumbnail"/>
+                        <a href="#">@Model.DisplayAtk</a>
+                    </span>
+                </li>
+            }
+            else if (Model.type.Contains("Monster"))
+            {
+                <li>
+                    <span class="card-data-header">ATK</span>
+                    <span class="card-data-cost card-data-subheader">
+                        <img src="~/img/sword.png" alt="@Model.DisplayAtk" width="25" class="img-thumbnail"/>
+                        <a href="#">@Model.DisplayAtk</a>
+                    </span>
+                </li>
+                <li>
+                    <span class="card-data-header">DEF</span>
+                    <span class="card-data-cost card-data-subheader">
+                        <i class="fa-solid fa-shield"></i>
+                        <a href="#">@Model.DisplayDef</a>
+                    </span>
+                </li>
+            }
+            @if (Model.archetype != null && Model.archetype.Any())
+            {
+                <li>
+                    <span class="card-data-header">Archetype</span>
+                    <span class="card-data-cost card-data-subheader">
+                        <i class="fa-solid fa-flask"></i>
+                        <a asp-action="ShowArchetype" asp-route-archetype="@Model.archetype" target="_blank">@Model.archetype</a>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <span class="card-data-header">Archetype</span>
+                    <span class="card-data-cost card-data-subheader">
+                        <i class="fa-solid fa-flask"></i>
+                        <a class="text-decoration-none">Pas d'archetype</a>
+                    </span>
+                </li>
+            }
+            @if (Model.misc_info != null && Model.misc_info.Any())
+            {
+                @foreach (var date in Model.misc_info ?? [])
+                {
+                    <li>
+                        <span class="card-data-header">TCG Date</span>
+                        <span class="card-data-cost card-data-subheader">
+                            <i class="fa-solid fa-calendar"></i>
+                            @(string.IsNullOrEmpty(date.tcg_date) ? "Not Released" : date.tcg_date)
+                        </span>
+                    </li>
+
+                    <li>
+                        <span class="card-data-header">OCG Date</span>
+                        <span class="card-data-cost card-data-subheader">
+                            <i class="fa-solid fa-calendar"></i>
+                            @date.ocg_date
+                        </span>
+                    </li>
+                }
+            }
+        </ul>
+        @if (!string.IsNullOrEmpty(Model.pend_desc))
+        {
+            <h4>Pendulum Effect</h4>
+            <div class="card-text">@Model.pend_desc
+            </div>
+            <hr>
+            <h4>Card Text</h4>
+            <div class="card-text ">@Model.monster_desc
+            </div>
+            <hr>
+        }
+        else
+        {
+            <h4>Card Text/Effect</h4>
+            <div class="card-text ">@Model.desc
+            </div>
+            <hr>
+        }
+    </div>
+</div>
