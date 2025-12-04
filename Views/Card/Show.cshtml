@@ -50,7 +50,8 @@
                     <span class="card-data-header">Type</span>
                     <span class="card-data-cost card-data-subheader">
                         <i class="fa-solid fa-book"></i>
-                        <a href="#">@(Model.race + " " + Model.type)</a>
+                        <a asp-action="ShowRaceType" asp-route-race="@Model.race" asp-route-type="@Model.type"
+                           target="_blank">@(Model.race + " " + Model.type)</a>
                     </span>
                 </li>
             }
@@ -60,7 +61,8 @@
                     <span class="card-data-header">Type</span>
                     <span class="card-data-cost card-data-subheader">
                         <i class="fa-solid fa-book"></i>
-                        <a href="#">@Model.type</a>
+                        <a asp-action="ShowType" asp-route-type="@Model.type"
+                           target="_blank">@Model.type</a>
                     </span>
                 </li>
                 <li>
@@ -69,7 +71,7 @@
                         <img class="card-typing-icon"
                              src="https://images.ygoprodeck.com/images/cards/icons/race/@(Model.race).png"
                              alt="Fairy" title="Fairy" loading="lazy">
-                        <a href="#">@Model.race</a>
+                        <a asp-action="ShowRace" asp-route-race="@Model.race" target="_blank">@Model.race</a>
                     </span>
                 </li>
             }
@@ -82,7 +84,7 @@
                              src="https://images.ygoprodeck.com/images/cards/@(Model.attribute).jpg"
                              alt="@Model.attribute"
                              title="@Model.attribute" loading="lazy">
-                        <a href="#">@Model.attribute</a>
+                        <a asp-action="ShowAttribute" asp-route-attribute="@Model.attribute" target="_blank">@Model.attribute</a>
                     </span>
                 </li>
             }
@@ -95,7 +97,7 @@
                              src="https://ygoprodeck.com/wp-content/uploads/2017/01/level.png" alt="@Model.level"
                              title="@Model.level"
                              loading="lazy">
-                        <a href="#">@Model.level</a>
+                        <a asp-action="ShowLevel" asp-route-level="@Model.level" target="_blank">@Model.level</a>
                     </span>
                 </li>
             }
@@ -108,7 +110,7 @@
                              src="https://ygoprodeck.com/wp-content/uploads/2017/01/level.png" alt="@Model.scale"
                              title="@Model.scale"
                              loading="lazy">
-                        <a href="#">@Model.scale</a>
+                        <a asp-action="ShowScale" asp-route-scale="@Model.scale" target="_blank">@Model.scale</a>
                     </span>
                 </li>
             }
@@ -121,7 +123,7 @@
                              src="https://ygoprodeck.com/wp-content/uploads/2017/01/level.png" alt="@Model.linkval"
                              title="@Model.linkval"
                              loading="lazy">
-                        <a href="#">@Model.linkval</a>
+                        <a asp-action="ShowLink" asp-route-link="@Model.linkval" target="_blank">@Model.linkval</a>
                     </span>
                 </li>
             }
@@ -131,7 +133,7 @@
                     <span class="card-data-header">ATK</span>
                     <span class="card-data-cost card-data-subheader">
                         <img src="~/img/sword.png" alt="@Model.DisplayAtk" width="25" class="img-thumbnail"/>
-                        <a href="#">@Model.DisplayAtk</a>
+                        <a asp-action="ShowAtk" asp-route-atk="@Model.DisplayAtk" target="_blank">@Model.DisplayAtk</a>
                     </span>
                 </li>
             }
@@ -141,14 +143,14 @@
                     <span class="card-data-header">ATK</span>
                     <span class="card-data-cost card-data-subheader">
                         <img src="~/img/sword.png" alt="@Model.DisplayAtk" width="25" class="img-thumbnail"/>
-                        <a href="#">@Model.DisplayAtk</a>
+                        <a asp-action="ShowAtk" asp-route-atk="@Model.DisplayAtk" target="_blank">@Model.DisplayAtk</a>
                     </span>
                 </li>
                 <li>
                     <span class="card-data-header">DEF</span>
                     <span class="card-data-cost card-data-subheader">
                         <i class="fa-solid fa-shield"></i>
-                        <a href="#">@Model.DisplayDef</a>
+                        <a asp-action="ShowDef" asp-route-def="@Model.DisplayDef" target="_blank">@Model.DisplayDef</a>
                     </span>
                 </li>
             }
@@ -158,7 +160,8 @@
                     <span class="card-data-header">Archetype</span>
                     <span class="card-data-cost card-data-subheader">
                         <i class="fa-solid fa-flask"></i>
-                        <a asp-action="ShowArchetype" asp-route-archetype="@Model.archetype" target="_blank">@Model.archetype</a>
+                        <a asp-action="ShowArchetype" asp-route-archetype="@Model.archetype"
+                           target="_blank">@Model.archetype</a>
                     </span>
                 </li>
             }

@@ -1,7 +1,7 @@
 ﻿@using MVC_App.Models.CardModels
 @model IEnumerable<CardModel>
 @{
-    ViewData["Title"] = Model.First().archetype + " Archetype";
+    ViewData["Title"] = Model.First().attribute;
 }
 
 <div class="text-center">
@@ -19,19 +19,12 @@
                         </p>
                     </div>
                     <div class="card-body">
-                        <img class="img-fluid card-img" src="@card.card_images.First().image_url" alt="@card.name" width="120"/>
+                        <img class="img-fluid card-img" src="@card.card_images.First().image_url" alt="@card.name"
+                             width="120"/>
                     </div>
                     <div class="card-footer">
-                        @if (card.type is "Spell Card" or "Trap Card")
-                        {
-                            <a asp-action="ShowRaceType" asp-route-race="@card.race" asp-route-type="@card.type"
-                               target="_blank">@(card.race + " " + card.type)</a>
-                        }
-                        else
-                        {
-                            <a asp-action="ShowType" asp-route-type="@card.type"
-                               target="_blank">@card.type</a>
-                        }
+                        <a asp-action="ShowType" asp-route-type="@card.type"
+                           target="_blank">@card.type</a>
                     </div>
                 </div>
             </div>

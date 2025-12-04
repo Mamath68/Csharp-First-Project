@@ -24,11 +24,13 @@
                     <div class="card-footer">
                         @if (card.type is "Spell Card" or "Trap Card")
                         {
-                            @(card.race + " " + card.type)
+                            <a asp-action="ShowRaceType" asp-route-race="@card.race" asp-route-type="@card.type"
+                               target="_blank">@(card.race + " " + card.type)</a>
                         }
                         else
                         {
-                            @card.type
+                            <a asp-action="ShowType" asp-route-type="@card.type"
+                               target="_blank">@card.type</a>
                         }
                     </div>
                 </div>
